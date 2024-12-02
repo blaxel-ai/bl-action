@@ -1,5 +1,9 @@
 name: 'Beamlit action'
 description: 'Github action for Beamlit, a platform for building and deploying AI agents'
+author: beamlit
+branding:
+  color: 'orange'
+  icon: 'bold'
 inputs:
   workspace:
     description: 'Beamlit workspace to deploy to'
