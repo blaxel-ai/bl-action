@@ -10,6 +10,6 @@ spec:
       policies: ["only-eu"]
       configuration:
         github_token:
-          value: ${GITHUB_TOKEN}
+          value: ${GH_PAT}
           secret: true
       store_id: "github"

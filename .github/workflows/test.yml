@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v4
       - uses: beamlit/beamlit-action@v1
