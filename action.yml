@@ -21,8 +21,10 @@ runs:
     - name: Install beamlit
       shell: bash
       run: |
-        curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=/usr/local/bin sh
-        cp  /usr/local/bin/beamlit /usr/local/bin/bl
+        mkdir -p $HOME/.local/bin
+        curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+        cp $HOME/.local/bin/beamlit $HOME/.local/bin/bl
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: Login to Beamlit
       shell: bash
       env:
