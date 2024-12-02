@@ -1,0 +1,26 @@
+apiVersion: beamlit.com/v1alpha1
+kind: Agent
+metadata:
+  name: agent-gpt-4o-mini
+spec:
+  display_name: Agent GPT 4o mini
+  deployments:
+    - environment: production
+      enabled: true
+      policies: ["only-eu"]
+      functions:
+        - search
+        - math
+      agent_chain:
+        - name: agent-github
+          enabled: true
+          description: ""
+      model: gpt-4o-mini
+      description: ""
+      runtime:
+        image: ghcr.io/beamlit/agents/beamlit-agent:latest
+        resources:
+          limits:
+            memory: 128M
+          requests:
+            memory: 128M

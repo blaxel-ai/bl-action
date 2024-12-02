@@ -1,0 +1,11 @@
+apiVersion: beamlit.com/v1alpha1
+kind: Policy
+metadata:
+  name: only-us
+spec:
+  display_name: Only US
+  type: location
+  flavors: []
+  locations:
+    - name: na
+      type: continent

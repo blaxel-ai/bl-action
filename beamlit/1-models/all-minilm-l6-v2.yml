@@ -1,0 +1,17 @@
+apiVersion: beamlit.com/v1alpha1
+kind: Model
+metadata:
+  name: all-minilm-l6-v2
+spec:
+  display_name: All MiniLM L6 v2
+  deployments:
+  - environment: production
+    enabled: true
+    policies: ["only-eu"]
+    integration_connections:
+      - integration: huggingface
+        name: hf-beamlit-organization
+    flavors: []
+    runtime:
+      model: sentence-transformers/all-MiniLM-L6-v2
+      type: huggingface

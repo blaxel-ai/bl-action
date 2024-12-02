@@ -1,0 +1,20 @@
+apiVersion: beamlit.com/v1alpha1
+kind: Agent
+metadata:
+  name: agent-github
+spec:
+  display_name: Agent Github
+  deployments:
+    - environment: production
+      functions:
+        - github
+      model: gpt-4o-mini
+      policies: ["only-eu"]
+      description: Agent to execute request on github repositories aside from controlplane and store
+      runtime:
+        image: ghcr.io/beamlit/agents/beamlit-agent:latest
+        resources:
+          limits:
+            memory: 128M
+          requests:
+            memory: 128M

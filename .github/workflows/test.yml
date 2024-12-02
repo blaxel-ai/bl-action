@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: beamlit/beamlit-action@v1
+        with:
+          workspace: development
+          api_key: ${{ secrets.BEAMLIT_API_KEY }}
+          deploy: beamlit
+      - name: List policies
+        run: bl get policies
+      - name: List models
+        run: bl get models
+      - name: List functions
+        run: bl get functions
+      - name: List agents
+        run: bl get agents

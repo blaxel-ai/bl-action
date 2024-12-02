@@ -1,0 +1,10 @@
+apiVersion: beamlit.com/v1alpha1
+kind: Policy
+metadata:
+  name: only-eu
+spec:
+  name: Only EU
+  type: location
+  locations:
+    - name: eu
+      type: continent

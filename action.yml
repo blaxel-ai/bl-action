@@ -1,0 +1,30 @@
+name: 'Beamlit action'
+description: 'Github action for Beamlit, a platform for building and deploying AI agents'
+inputs:
+  workspace:
+    description: 'Beamlit workspace to deploy to'
+    required: true
+  api_key:
+    description: 'Beamlit API key'
+    required: true
+  deploy:
+    description: 'If you want to deploy to Beamlit, specify the path to the folder or the file you want to deploy'
+    default: ''
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - name: Install beamlit
+      shell: bash
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=/usr/local/bin sh
+        cp  /usr/local/bin/beamlit /usr/local/bin/bl
+    - name: Login to Beamlit
+      shell: bash
+      env:
+        BL_API_KEY: ${{ inputs.api_key }}
+      run: bl login ${{ inputs.workspace }}
+    - name: Deploy to Beamlit
+      shell: bash
+      if: inputs.deploy != ''
+      run: bl apply -R -f ${{ inputs.deploy }}

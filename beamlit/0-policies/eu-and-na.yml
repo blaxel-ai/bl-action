@@ -1,0 +1,13 @@
+apiVersion: beamlit.com/v1alpha1
+kind: Policy
+metadata:
+  name: eu-and-na
+spec:
+  display_name: EU and NA
+  type: location
+  flavors: []
+  locations:
+    - name: eu
+      type: continent
+    - name: na
+      type: continent
