@@ -3,9 +3,9 @@ kind: Function
 metadata:
   name: math
 spec:
-  display_name: Math
+  displayName: Math
   deployments:
     - environment: production
       enabled: true
       policies: ["only-eu"]
-      store_id: "math"
+      storeId: "math"

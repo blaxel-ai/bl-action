@@ -3,7 +3,7 @@ kind: Agent
 metadata:
   name: agent-github
 spec:
-  display_name: Agent Github
+  displayName: Agent Github
   deployments:
     - environment: production
       functions:

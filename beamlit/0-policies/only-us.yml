@@ -3,7 +3,7 @@ kind: Policy
 metadata:
   name: only-us
 spec:
-  display_name: Only US
+  displayName: Only US
   type: location
   flavors: []
   locations:

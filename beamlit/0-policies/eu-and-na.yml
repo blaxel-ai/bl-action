@@ -3,7 +3,7 @@ kind: Policy
 metadata:
   name: eu-and-na
 spec:
-  display_name: EU and NA
+  displayName: EU and NA
   type: location
   flavors: []
   locations:

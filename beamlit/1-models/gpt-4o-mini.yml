@@ -3,11 +3,11 @@ kind: Model
 metadata:
   name: gpt-4o-mini
 spec:
-  display_name: GPT 4o Mini
+  displayName: GPT 4o Mini
   deployments:
   - environment: production
     enabled: true
-    integration_connections:
+    integrationConnections:
       - openai-beamlit-organization
     policies: ["only-eu"]
     runtime:

@@ -3,7 +3,7 @@ kind: Function
 metadata:
   name: github
 spec:
-  display_name: Github
+  displayName: Github
   deployments:
     - environment: production
       enabled: true
@@ -12,4 +12,4 @@ spec:
         github_token:
           value: ${GH_PAT}
           secret: true
-      store_id: "github"
+      storeId: "github"

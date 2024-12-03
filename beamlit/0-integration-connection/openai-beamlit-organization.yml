@@ -6,4 +6,4 @@ spec:
   integration: openai
   name: openai-beamlit-organization
   secret:
-    api_key: ${OPENAI_API_KEY}
+    apiKey: ${OPENAI_API_KEY}

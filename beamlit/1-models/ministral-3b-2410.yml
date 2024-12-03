@@ -3,12 +3,12 @@ kind: Model
 metadata:
   name: ministral-3b-2410
 spec:
-  display_name: Ministral 3b 2410
+  displayName: Ministral 3b 2410
   deployments:
   - environment: production
     enabled: true
     policies: ["only-eu"]
-    integration_connections:
+    integrationConnections:
       - mistral-beamlit-organization
     runtime:
       model: ministral-3b-2410

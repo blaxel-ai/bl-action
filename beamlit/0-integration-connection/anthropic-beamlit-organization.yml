@@ -6,4 +6,4 @@ spec:
   integration: anthropic
   name: anthropic-beamlit-organization
   secret:
-    api_key: ${ANTHROPIC_API_KEY}
+    apiKey: ${ANTHROPIC_API_KEY}

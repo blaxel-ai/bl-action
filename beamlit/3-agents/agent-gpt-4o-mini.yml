@@ -3,7 +3,7 @@ kind: Agent
 metadata:
   name: agent-gpt-4o-mini
 spec:
-  display_name: Agent GPT 4o mini
+  displayName: Agent GPT 4o mini
   deployments:
     - environment: production
       enabled: true
@@ -11,7 +11,7 @@ spec:
       functions:
         - search
         - math
-      agent_chain:
+      agentChain:
         - name: agent-github
           enabled: true
           description: ""

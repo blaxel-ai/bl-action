@@ -8,7 +8,7 @@ inputs:
   workspace:
     description: 'Beamlit workspace to deploy to'
     required: true
-  api_key:
+  apiKey:
     description: 'Beamlit API key'
     required: true
   deploy:
@@ -28,7 +28,7 @@ runs:
     - name: Login to Beamlit
       shell: bash
       env:
-        BL_API_KEY: ${{ inputs.api_key }}
+        BL_API_KEY: ${{ inputs.apiKey }}
       run: bl login ${{ inputs.workspace }}
     - name: Deploy to Beamlit
       shell: bash

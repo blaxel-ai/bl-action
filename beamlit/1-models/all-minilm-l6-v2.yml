@@ -3,12 +3,12 @@ kind: Model
 metadata:
   name: all-minilm-l6-v2
 spec:
-  display_name: All MiniLM L6 v2
+  displayName: All MiniLM L6 v2
   deployments:
   - environment: production
     enabled: true
     policies: ["only-eu"]
-    integration_connections:
+    integrationConnections:
       - hf-beamlit-organization
     flavors: []
     runtime:

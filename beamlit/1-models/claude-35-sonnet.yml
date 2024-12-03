@@ -3,12 +3,12 @@ kind: Model
 metadata:
   name: claude-3-5-sonnet
 spec:
-  display_name: Claude 3.5 Sonnet
+  displayName: Claude 3.5 Sonnet
   deployments:
   - environment: production
     enabled: true
     policies: ["only-eu"]
-    integration_connections:
+    integrationConnections:
       - anthropic-beamlit-organization
     runtime:
       model: claude-3-5-sonnet-20241022
