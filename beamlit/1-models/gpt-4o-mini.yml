@@ -8,8 +8,7 @@ spec:
   - environment: production
     enabled: true
     integration_connections:
-      - integration: openai
-        name: openai-beamlit-organization
+      - openai-beamlit-organization
     policies: ["only-eu"]
     runtime:
       model: gpt-4o-mini

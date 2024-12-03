@@ -9,8 +9,7 @@ spec:
     enabled: true
     policies: ["only-eu"]
     integration_connections:
-      - integration: mistral
-        name: mistral-beamlit-organization
+      - mistral-beamlit-organization
     runtime:
       model: ministral-3b-2410
       type: mistral

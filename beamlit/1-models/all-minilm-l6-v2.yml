@@ -9,8 +9,7 @@ spec:
     enabled: true
     policies: ["only-eu"]
     integration_connections:
-      - integration: huggingface
-        name: hf-beamlit-organization
+      - hf-beamlit-organization
     flavors: []
     runtime:
       model: sentence-transformers/all-MiniLM-L6-v2

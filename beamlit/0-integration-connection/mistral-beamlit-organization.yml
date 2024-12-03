@@ -1,0 +1,9 @@
+apiVersion: beamlit.com/v1alpha1
+kind: IntegrationConnection
+metadata:
+  name: mistral-beamlit-organization
+spec:
+  integration: mistral
+  name: mistral-beamlit-organization
+  secret:
+    api_key: ${MISTRAL_API_KEY}

@@ -9,8 +9,7 @@ spec:
     enabled: true
     policies: ["only-eu"]
     integration_connections:
-      - integration: anthropic
-        name: anthropic-beamlit-organization
+      - anthropic-beamlit-organization
     runtime:
       model: claude-3-5-sonnet-20241022
       type: anthropic

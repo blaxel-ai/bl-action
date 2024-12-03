@@ -1,0 +1,9 @@
+apiVersion: beamlit.com/v1alpha1
+kind: IntegrationConnection
+metadata:
+  name: openai-beamlit-organization
+spec:
+  integration: openai
+  name: openai-beamlit-organization
+  secret:
+    api_key: ${OPENAI_API_KEY}
