@@ -1,0 +1,9 @@
+apiVersion: beamlit.com/v1alpha1
+kind: IntegrationConnection
+metadata:
+  name: xai-beamlit-organization
+spec:
+  integration: xai
+  name: xai-beamlit-organization
+  secret:
+    api_key: ${XAI_API_KEY}
