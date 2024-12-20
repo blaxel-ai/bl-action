@@ -4,6 +4,5 @@ metadata:
   name: mistral-beamlit-organization
 spec:
   integration: mistral
-  name: mistral-beamlit-organization
   secret:
     api_key: ${MISTRAL_API_KEY}

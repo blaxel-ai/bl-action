@@ -2,14 +2,13 @@ apiVersion: beamlit.com/v1alpha1
 kind: Function
 metadata:
   name: search
+  environment: production
+  displayName: Search
 spec:
-  display_name: Search
-  deployments:
-    - environment: production
-      enabled: true
-      policies: ["only-eu"]
-      configuration:
-        tavily_api_key:
-          value: ${TAVILY_API_KEY}
-          secret: true
-      store_id: "search"
+  enabled: true
+  policies: ["only-eu"]
+  configuration:
+    tavily_api_key:
+      value: ${TAVILY_API_KEY}
+      secret: true
+  store_id: "search"

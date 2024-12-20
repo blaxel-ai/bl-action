@@ -2,8 +2,8 @@ apiVersion: beamlit.com/v1alpha1
 kind: Policy
 metadata:
   name: eu-and-na
+  displayName: EU and NA
 spec:
-  display_name: EU and NA
   type: location
   flavors: []
   locations:

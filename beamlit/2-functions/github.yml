@@ -2,14 +2,13 @@ apiVersion: beamlit.com/v1alpha1
 kind: Function
 metadata:
   name: github
+  environment: production
+  displayName: Github
 spec:
-  display_name: Github
-  deployments:
-    - environment: production
-      enabled: true
-      policies: ["only-eu"]
-      configuration:
-        github_token:
-          value: ${GH_PAT}
-          secret: true
-      store_id: "github"
+  enabled: true
+  policies: ["only-eu"]
+  configuration:
+    github_token:
+      value: ${GH_PAT}
+      secret: true
+  store_id: "github"

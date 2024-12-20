@@ -2,14 +2,13 @@ apiVersion: beamlit.com/v1alpha1
 kind: Model
 metadata:
   name: gpt-4o-mini
+  displayName: GPT 4o Mini
+  environment: production
 spec:
-  display_name: GPT 4o Mini
-  deployments:
-  - environment: production
-    enabled: true
-    integration_connections:
-      - openai-beamlit-organization
-    policies: ["only-eu"]
-    runtime:
-      model: gpt-4o-mini
-      type: openai
+  enabled: true
+  integration_connections:
+    - openai-beamlit-organization
+  policies: ["only-eu"]
+  runtime:
+    model: gpt-4o-mini
+    type: openai

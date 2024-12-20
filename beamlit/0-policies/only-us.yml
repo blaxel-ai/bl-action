@@ -2,8 +2,8 @@ apiVersion: beamlit.com/v1alpha1
 kind: Policy
 metadata:
   name: only-us
+  displayName: Only US
 spec:
-  display_name: Only US
   type: location
   flavors: []
   locations:

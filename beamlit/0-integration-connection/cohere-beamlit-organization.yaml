@@ -4,6 +4,5 @@ metadata:
   name: cohere-beamlit-organization
 spec:
   integration: cohere
-  name: cohere-beamlit-organization
   secret:
     api_key: ${COHERE_API_KEY}
