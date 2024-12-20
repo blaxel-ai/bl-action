@@ -20,7 +20,7 @@ jobs:
       - uses: beamlit/beamlit-action@v1
         with:
           workspace: main
-          apiKey: ${{ secrets.BEAMLIT_API_KEY }}
+          apikey: ${{ secrets.BEAMLIT_API_KEY }}
           deploy: beamlit
       - name: List policies
         run: bl get policies

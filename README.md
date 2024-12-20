@@ -37,7 +37,7 @@ jobs:
         uses: beamlit/beamlit-action@v1
         with:
           workspace: 'your-workspace'
-          apiKey: ${{ secrets.BEAMLIT_API_KEY }}
+          apikey: ${{ secrets.BEAMLIT_API_KEY }}
           deploy: 'path/to/your/deployment/folder'
 ```
 
