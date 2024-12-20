@@ -11,4 +11,4 @@ spec:
     tavily_api_key:
       value: ${TAVILY_API_KEY}
       secret: true
-  store_id: "search"
+  storeId: "search"

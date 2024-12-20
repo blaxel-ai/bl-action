@@ -11,4 +11,4 @@ spec:
     github_token:
       value: ${GH_PAT}
       secret: true
-  store_id: "github"
+  storeId: "github"

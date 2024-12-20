@@ -7,7 +7,7 @@ metadata:
 spec:
   enabled: true
   policies: ["only-eu"]
-  integration_connections:
+  integrationConnectionss:
     - mistral-beamlit-organization
   runtime:
     model: ministral-3b-2410

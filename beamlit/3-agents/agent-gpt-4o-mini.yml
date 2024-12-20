@@ -10,7 +10,7 @@ spec:
   functions:
     - search
     - math
-  agent_chain:
+  agentChain:
     - name: agent-github
       enabled: true
       description: ""

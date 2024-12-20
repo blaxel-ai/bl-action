@@ -7,4 +7,4 @@ metadata:
 spec:
   enabled: true
   policies: ["only-eu"]
-  store_id: "math"
+  storeId: "math"
