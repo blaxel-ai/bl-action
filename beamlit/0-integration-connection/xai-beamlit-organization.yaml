@@ -5,4 +5,4 @@ metadata:
 spec:
   integration: xai
   secret:
-    api_key: ${XAI_API_KEY}
+    apiKey: ${XAI_API_KEY}

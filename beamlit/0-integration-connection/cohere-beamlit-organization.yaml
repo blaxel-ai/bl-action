@@ -5,4 +5,4 @@ metadata:
 spec:
   integration: cohere
   secret:
-    api_key: ${COHERE_API_KEY}
+    apiKey: ${COHERE_API_KEY}

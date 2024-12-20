@@ -5,4 +5,4 @@ metadata:
 spec:
   integration: openai
   secret:
-    api_key: ${OPENAI_API_KEY}
+    apiKey: ${OPENAI_API_KEY}

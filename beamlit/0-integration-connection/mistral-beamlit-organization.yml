@@ -5,4 +5,4 @@ metadata:
 spec:
   integration: mistral
   secret:
-    api_key: ${MISTRAL_API_KEY}
+    apiKey: ${MISTRAL_API_KEY}
