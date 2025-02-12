@@ -2,7 +2,7 @@ apiVersion: beamlit.com/v1alpha1
 kind: Function
 metadata:
   name: github
-  environment: production
+  environment: development
   displayName: Github
 spec:
   enabled: true

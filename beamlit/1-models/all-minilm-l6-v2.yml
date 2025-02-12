@@ -3,7 +3,7 @@ kind: Model
 metadata:
   name: all-minilm-l6-v2
   displayName: All MiniLM L6 v2
-  environment: production
+  environment: development
 spec:
   enabled: true
   policies: ["only-eu"]

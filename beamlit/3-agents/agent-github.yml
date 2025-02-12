@@ -2,7 +2,7 @@ apiVersion: beamlit.com/v1alpha1
 kind: Agent
 metadata:
   name: agent-github
-  environment: production
+  environment: development
   displayName: Agent Github
 spec:
   functions:
