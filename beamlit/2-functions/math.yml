@@ -3,7 +3,6 @@ kind: Function
 metadata:
   name: math
   displayName: Math
-  environment: development
 spec:
   enabled: true
   policies: ["only-eu"]

@@ -3,7 +3,6 @@ kind: Model
 metadata:
   name: claude-3-5-sonnet
   displayName: Claude 3.5 Sonnet
-  environment: development
 spec:
   enabled: true
   policies: ["only-eu"]

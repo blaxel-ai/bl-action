@@ -3,7 +3,6 @@ kind: Agent
 metadata:
   name: agent-gpt-4o-mini
   displayName: Agent GPT 4o mini
-  environment: development
 spec:
   enabled: true
   policies: ["only-eu"]
