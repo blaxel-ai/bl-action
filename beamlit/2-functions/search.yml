@@ -2,7 +2,6 @@ apiVersion: beamlit.com/v1alpha1
 kind: Function
 metadata:
   name: search
-  environment: production
   displayName: Search
 spec:
   enabled: true

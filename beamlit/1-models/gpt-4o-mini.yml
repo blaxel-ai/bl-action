@@ -3,7 +3,6 @@ kind: Model
 metadata:
   name: gpt-4o-mini
   displayName: GPT 4o Mini
-  environment: production
 spec:
   enabled: true
   integrationConnections:
