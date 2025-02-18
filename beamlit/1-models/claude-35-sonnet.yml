@@ -1,4 +1,4 @@
-apiVersion: beamlit.com/v1alpha1
+apiVersion: blaxel.ai/v1alpha1
 kind: Model
 metadata:
   name: claude-3-5-sonnet
@@ -7,7 +7,7 @@ spec:
   enabled: true
   policies: ["only-eu"]
   integrationConnections:
-    - anthropic-beamlit-organization
+    - anthropic-blaxel-organization
   runtime:
     model: claude-3-5-sonnet-20241022
     type: anthropic

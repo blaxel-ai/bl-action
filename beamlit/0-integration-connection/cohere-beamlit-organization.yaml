@@ -1,7 +1,7 @@
-apiVersion: beamlit.com/v1alpha1
+apiVersion: blaxel.ai/v1alpha1
 kind: IntegrationConnection
 metadata:
-  name: cohere-beamlit-organization
+  name: cohere-blaxel-organization
 spec:
   integration: cohere
   secret:

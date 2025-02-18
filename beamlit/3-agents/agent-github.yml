@@ -1,4 +1,4 @@
-apiVersion: beamlit.com/v1alpha1
+apiVersion: blaxel.ai/v1alpha1
 kind: Agent
 metadata:
   name: agent-github
@@ -10,7 +10,7 @@ spec:
   policies: ["only-eu"]
   description: Agent to execute request on github repositories aside from controlplane and store
   runtime:
-    image: ghcr.io/beamlit/agents/beamlit-agent:latest
+    image: ghcr.io/blaxel/agents/blaxel-agent:latest
     resources:
       limits:
         memory: 128M

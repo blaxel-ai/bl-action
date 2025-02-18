@@ -1,4 +1,4 @@
-apiVersion: beamlit.com/v1alpha1
+apiVersion: blaxel.ai/v1alpha1
 kind: Agent
 metadata:
   name: agent-gpt-4o-mini
@@ -16,7 +16,7 @@ spec:
   model: gpt-4o-mini
   description: ""
   runtime:
-    image: ghcr.io/beamlit/agents/beamlit-agent:latest
+    image: ghcr.io/blaxel/agents/blaxel-agent:latest
     resources:
       limits:
         memory: 128M

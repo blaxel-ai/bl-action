@@ -1,31 +1,31 @@
 <p align="center">
-  <img alt="Beamlit Logo" src="https://beamlit.com/logo_short.png" height="140" />
-  <h3 align="center">Beamlit Action</h3>
-  <p align="center"><a href="https://github.com/features/actions">GitHub Action</a> for Beamlit</p>
+  <img alt="Blaxel Logo" src="https://blaxel.ai/logo_short.png" height="140" />
+  <h3 align="center">Blaxel Action</h3>
+  <p align="center"><a href="https://github.com/features/actions">GitHub Action</a> for Blaxel</p>
   <p align="center">
-    <a href="https://github.com/beamlit/beamlit-action/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/beamlit/beamlit-action.svg?logo=github&style=flat-square"></a>
-    <a href="https://github.com/marketplace/actions/beamlit-action"><img alt="GitHub marketplace" src="https://img.shields.io/badge/marketplace-beamlit--action-blue?logo=github&style=flat-square"></a>
+    <a href="https://github.com/blaxel/blaxel-action/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/blaxel/blaxel-action.svg?logo=github&style=flat-square"></a>
+    <a href="https://github.com/marketplace/actions/blaxel-action"><img alt="GitHub marketplace" src="https://img.shields.io/badge/marketplace-blaxel--action-blue?logo=github&style=flat-square"></a>
   </p>
 </p>
 
-___
+---
 
-* [Usage](#usage)
-  * [Workflow](#workflow)
-* [Setup](#setup)
-* [License](#license)
-* [Contributing](#contributing)
-* [Support](#support)
+- [Usage](#usage)
+  - [Workflow](#workflow)
+- [Setup](#setup)
+- [License](#license)
+- [Contributing](#contributing)
+- [Support](#support)
 
 ## Usage
 
-[Beamlit](https://www.beamlit.com) is a platform for building and deploying AI agents. Please visit [the documentation](https://docs.beamlit.com) for more information about Beamlit.
-With this action, you can automate the deployment of your AI resources to Beamlit directly from your GitHub workflows.
+[Blaxel](https://www.blaxel.ai) is a platform for building and deploying AI agents. Please visit [the documentation](https://docs.blaxel.ai) for more information about Blaxel.
+With this action, you can automate the deployment of your AI resources to Blaxel directly from your GitHub workflows.
 
 ### Workflow
 
 ```yaml
-name: Deploy to Beamlit
+name: Deploy to Blaxel
 on: [push]
 jobs:
   deploy:
@@ -33,18 +33,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Deploy to Beamlit
-        uses: beamlit/beamlit-action@v1
+      - name: Deploy to Blaxel
+        uses: blaxel/blaxel-action@v1
         with:
-          workspace: 'your-workspace'
-          apikey: ${{ secrets.BEAMLIT_API_KEY }}
-          deploy: 'path/to/your/deployment/folder'
+          workspace: "your-workspace"
+          apikey: ${{ secrets.BL_API_KEY }}
+          deploy: "path/to/your/deployment/folder"
 ```
 
 ## Setup
 
-1. **Create a Beamlit API Key**: Go to your Beamlit account settings and generate an API key.
-2. **Add the API Key to GitHub Secrets**: In your GitHub repository, navigate to Settings > Secrets and add a new secret named `BEAMLIT_API_KEY`.
+1. **Create a Blaxel API Key**: Go to your Blaxel account settings and generate an API key.
+2. **Add the API Key to GitHub Secrets**: In your GitHub repository, navigate to Settings > Secrets and add a new secret named `BL_API_KEY`.
 3. **Configure the Workflow**: Use the example above to configure your GitHub Actions workflow file.
 
 ## License
