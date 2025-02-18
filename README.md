@@ -3,7 +3,7 @@
   <h3 align="center">Blaxel Action</h3>
   <p align="center"><a href="https://github.com/features/actions">GitHub Action</a> for Blaxel</p>
   <p align="center">
-    <a href="https://github.com/blaxel/blaxel-action/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/blaxel/blaxel-action.svg?logo=github&style=flat-square"></a>
+    <a href="https://github.com/beamlit/blaxel-action/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/beamlit/blaxel-action.svg?logo=github&style=flat-square"></a>
     <a href="https://github.com/marketplace/actions/blaxel-action"><img alt="GitHub marketplace" src="https://img.shields.io/badge/marketplace-blaxel--action-blue?logo=github&style=flat-square"></a>
   </p>
 </p>
@@ -34,7 +34,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deploy to Blaxel
-        uses: blaxel/blaxel-action@v1
+        uses: beamlit/blaxel-action@v1
         with:
           workspace: "your-workspace"
           apikey: ${{ secrets.BL_API_KEY }}
