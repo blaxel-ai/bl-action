@@ -3,8 +3,8 @@
   <h3 align="center">Blaxel Action</h3>
   <p align="center"><a href="https://github.com/features/actions">GitHub Action</a> for Blaxel</p>
   <p align="center">
-    <a href="https://github.com/beamlit/blaxel-action/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/beamlit/blaxel-action.svg?logo=github&style=flat-square"></a>
-    <a href="https://github.com/marketplace/actions/blaxel-action"><img alt="GitHub marketplace" src="https://img.shields.io/badge/marketplace-blaxel--action-blue?logo=github&style=flat-square"></a>
+    <a href="https://github.com/beamlit/bl-action/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/beamlit/blaxel-action.svg?logo=github&style=flat-square"></a>
+    <a href="https://github.com/marketplace/actions/bl-action"><img alt="GitHub marketplace" src="https://img.shields.io/badge/marketplace-blaxel--action-blue?logo=github&style=flat-square"></a>
   </p>
 </p>
 
