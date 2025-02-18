@@ -1,36 +1,36 @@
-name: 'Beamlit action'
-description: 'Github action for Beamlit, a platform for building and deploying AI agents'
-author: beamlit
+name: "Blaxel action"
+description: "Github action for Blaxel, a platform for building and deploying AI agents"
+author: blaxel
 branding:
-  color: 'orange'
-  icon: 'bold'
+  color: "orange"
+  icon: "bold"
 inputs:
   workspace:
-    description: 'Beamlit workspace to deploy to'
+    description: "Blaxel workspace to deploy to"
     required: true
   apikey:
-    description: 'Beamlit API key'
+    description: "Blaxel API key"
     required: true
   deploy:
-    description: 'If you want to deploy to Beamlit, specify the path to the folder or the file you want to deploy'
-    default: ''
+    description: "If you want to deploy to Blaxel, specify the path to the folder or the file you want to deploy"
+    default: ""
     required: false
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: Install beamlit
+    - name: Install blaxel
       shell: bash
       run: |
         mkdir -p $HOME/.local/bin
         curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
-        cp $HOME/.local/bin/beamlit $HOME/.local/bin/bl
+        cp $HOME/.local/bin/blaxel $HOME/.local/bin/bl
         echo "$HOME/.local/bin" >> $GITHUB_PATH
-    - name: Login to Beamlit
+    - name: Login to Blaxel
       shell: bash
       env:
         BL_API_KEY: ${{ inputs.apikey }}
       run: bl login ${{ inputs.workspace }}
-    - name: Deploy to Beamlit
+    - name: Deploy to Blaxel
       shell: bash
       if: inputs.deploy != ''
       run: bl apply -R -f ${{ inputs.deploy }}

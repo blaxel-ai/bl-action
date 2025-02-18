@@ -17,11 +17,11 @@ jobs:
       XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
     steps:
       - uses: actions/checkout@v4
-      - uses: beamlit/beamlit-action@v1
+      - uses: blaxel/blaxel-action@v1
         with:
           workspace: main
-          apikey: ${{ secrets.BEAMLIT_API_KEY }}
-          deploy: beamlit
+          apikey: ${{ secrets.BL_API_KEY }}
+          deploy: blaxel
       - name: List policies
         run: bl get policies
       - name: List models

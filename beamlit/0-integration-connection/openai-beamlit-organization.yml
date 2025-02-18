@@ -1,7 +1,7 @@
-apiVersion: beamlit.com/v1alpha1
+apiVersion: blaxel.ai/v1alpha1
 kind: IntegrationConnection
 metadata:
-  name: openai-beamlit-organization
+  name: openai-blaxel-organization
 spec:
   integration: openai
   secret:
