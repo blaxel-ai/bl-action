@@ -24,7 +24,7 @@ runs:
         mkdir -p $HOME/.local/bin
 
         if [ "$BL_ENV" = "dev" ]; then
-          curl -fsSL https://raw.githubusercontent.com/cploujoux/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+          curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
         else
           curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
         fi
