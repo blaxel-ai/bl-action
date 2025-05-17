@@ -24,9 +24,9 @@ runs:
         mkdir -p $HOME/.local/bin
 
         if [ "$BL_ENV" = "dev" ]; then
-          curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+          curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
         else
-          curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+          curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
         fi
         cp $HOME/.local/bin/blaxel $HOME/.local/bin/bl
         echo "$HOME/.local/bin" >> $GITHUB_PATH
