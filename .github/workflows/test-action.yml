@@ -1,0 +1,51 @@
+name: Test Action
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  BL_ENV: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+  BL_WORKSPACE: ${{ vars.BL_WORKSPACE }}
+  BL_API_KEY: ${{ secrets.BL_API_KEY }}
+
+jobs:
+  test-action:
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test bl-action
+        uses: ./  # This references the action in the current repo
+        with:
+          workspace: ${{ vars.BL_WORKSPACE }}
+          apikey: ${{ secrets.BL_API_KEY }}
+      - name: List agents
+        run: bl get agents
+      - name: List functions
+        run: bl get functions
+      - name: List models
+        run: bl get models
+      - name: List sandboxes
+        run: bl get sandboxes
+
+  test-matrix:
+    runs-on: ${{ matrix.os }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test on ${{ matrix.os }}
+        uses: ./
+        with:
+          workspace: ${{ vars.BL_WORKSPACE }}
+          apikey: ${{ secrets.BL_API_KEY }}

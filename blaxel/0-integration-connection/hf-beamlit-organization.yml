@@ -1,8 +1,0 @@
-apiVersion: blaxel.ai/v1alpha1
-kind: IntegrationConnection
-metadata:
-  name: hf-blaxel-organization
-spec:
-  integration: huggingface
-  secret:
-    apiKey: ${HF_API_TOKEN}

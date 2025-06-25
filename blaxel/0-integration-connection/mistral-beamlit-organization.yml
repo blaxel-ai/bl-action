@@ -1,8 +1,0 @@
-apiVersion: blaxel.ai/v1alpha1
-kind: IntegrationConnection
-metadata:
-  name: mistral-blaxel-organization
-spec:
-  integration: mistral
-  secret:
-    apiKey: ${MISTRAL_API_KEY}
