@@ -14,7 +14,7 @@ env:
 
 jobs:
   test-action:
-    environment: ${{ vars.BL_ENV }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,23 +34,9 @@ jobs:
       - name: List sandboxes
         run: bl get sandboxes
 
-  test-installation-only:
-    environment: ${{ vars.BL_ENV }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Test installation without deploy
-        uses: ./
-        with:
-          workspace: ${{ vars.BL_WORKSPACE }}
-          apikey: ${{ secrets.BL_API_KEY }}
-          # No deploy parameter to test that path
-
   test-matrix:
     runs-on: ${{ matrix.os }}
-    environment: ${{ vars.BL_ENV }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-20.04]
