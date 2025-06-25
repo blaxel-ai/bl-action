@@ -14,7 +14,7 @@ env:
 
 jobs:
   test-action:
-    environment: ${{ env.BL_ENV }}
+    environment: ${{ vars.BL_ENV }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
         run: bl get sandboxes
 
   test-installation-only:
-    environment: ${{ env.BL_ENV }}
+    environment: ${{ vars.BL_ENV }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -50,7 +50,7 @@ jobs:
 
   test-matrix:
     runs-on: ${{ matrix.os }}
-    environment: ${{ env.BL_ENV }}
+    environment: ${{ vars.BL_ENV }}
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-20.04]
