@@ -24,103 +24,44 @@ runs:
         repository: blaxel-ai/toolkit
         path: .bl-toolkit
         clean: false
+        fetch-depth: 0
+        fetch-tags: true
     - name: Install blaxel
       shell: bash
       run: |
         mkdir -p $HOME/.local/bin
 
-        # Function to download with multiple fallback methods
-        download_with_fallbacks() {
-          local repo=$1
-          local path=$2
-          local output_file=$3
-          local max_attempts=3
+        # LATEST_TAG is now available as environment variable
+        cd .bl-toolkit
 
-          echo "Downloading installation script..."
+        # Try different approaches to get the latest release tag
+        LATEST_TAG=$(git tag --sort=-version:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 2>/dev/null)
+        if [ -z "$LATEST_TAG" ]; then
+          # Fallback: try with less strict regex (allow more characters after version)
+          LATEST_TAG=$(git tag --sort=-version:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+' | grep -v -E '(rc|alpha|beta|dev|pre)' | head -n1 2>/dev/null)
+        fi
+        if [ -z "$LATEST_TAG" ]; then
+          # Fallback: just get the latest tag
+          LATEST_TAG=$(git tag --sort=-version:refname | head -n1 2>/dev/null)
+        fi
+        if [ -z "$LATEST_TAG" ]; then
+          LATEST_TAG="latest"
+        fi
 
-          # Method 1: Use locally checked out file (most reliable)
-          if [ -f ".bl-toolkit/$path" ]; then
-            echo "Using locally checked out installation script..."
-            cp ".bl-toolkit/$path" "$output_file"
-            echo "✓ Using local checkout"
-            return 0
-          fi
+        cd ..
+        echo "Using blaxel version: $LATEST_TAG"
 
-          # Method 2: GitHub API (fallback)
-          echo "Trying GitHub API..."
-          if curl -fsSL \
-            --connect-timeout 30 \
-            --max-time 300 \
-            -H "Accept: application/vnd.github.v3.raw" \
-            -H "User-Agent: bl-action" \
-            "https://api.github.com/repos/$repo/contents/$path" \
-            -o "$output_file" 2>/dev/null; then
-            echo "✓ Downloaded via GitHub API"
-            return 0
-          fi
+        # Use the locally checked out installation script
+        INSTALL_SCRIPT=".bl-toolkit/install.sh"
 
-          # Method 3: raw.githubusercontent.com with explicit TLS
-          echo "Trying raw.githubusercontent.com with TLS 1.2..."
-          if curl -fsSL \
-            --connect-timeout 30 \
-            --max-time 300 \
-            --tlsv1.2 \
-            -H "User-Agent: bl-action" \
-            "https://raw.githubusercontent.com/$repo/main/$path" \
-            -o "$output_file" 2>/dev/null; then
-            echo "✓ Downloaded via raw.githubusercontent.com"
-            return 0
-          fi
-
-          # Method 4: wget with different user agent
-          echo "Trying wget..."
-          if command -v wget >/dev/null 2>&1; then
-            if wget --secure-protocol=TLSv1_2 \
-              --timeout=30 \
-              --tries=1 \
-              --user-agent="bl-action" \
-              -O "$output_file" \
-              "https://raw.githubusercontent.com/$repo/main/$path" 2>/dev/null; then
-              echo "✓ Downloaded via wget"
-              return 0
-            fi
-          fi
-
-          # Method 5: GitHub tarball extraction (last resort)
-          echo "Trying GitHub tarball extraction..."
-          local temp_dir="/tmp/bl-install-$$"
-          mkdir -p "$temp_dir"
-
-          if curl -fsSL \
-            --connect-timeout 30 \
-            --max-time 300 \
-            -H "User-Agent: bl-action" \
-            "https://api.github.com/repos/$repo/tarball/main" | \
-            tar -xz -C "$temp_dir" --strip-components=1 2>/dev/null; then
-
-            if [ -f "$temp_dir/$path" ]; then
-              cp "$temp_dir/$path" "$output_file"
-              rm -rf "$temp_dir"
-              echo "✓ Downloaded via tarball extraction"
-              return 0
-            fi
-          fi
-
-          rm -rf "$temp_dir"
-          return 1
-        }
-
-        # Download the installation script with fallback methods
-        INSTALL_SCRIPT="/tmp/install.sh"
-
-        if download_with_fallbacks "blaxel-ai/toolkit" "install.sh" "$INSTALL_SCRIPT"; then
-          chmod +x "$INSTALL_SCRIPT"
-          BINDIR=$HOME/.local/bin sh "$INSTALL_SCRIPT"
-        else
-          echo "Error: Failed to download installation script with all methods"
-          echo "Please check your network connection and GitHub access"
+        if [ ! -f "$INSTALL_SCRIPT" ]; then
+          echo "Error: Installation script not found at $INSTALL_SCRIPT"
+          echo "Please ensure the toolkit repository was properly checked out"
           exit 1
         fi
+
+        chmod +x "$INSTALL_SCRIPT"
+        BINDIR=$HOME/.local/bin VERSION=$LATEST_TAG sh "$INSTALL_SCRIPT"
 
         # Verify installation
         if [ ! -f "$HOME/.local/bin/blaxel" ]; then
