@@ -18,42 +18,108 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout toolkit repository
+      uses: actions/checkout@v4
+      with:
+        repository: blaxel-ai/toolkit
+        path: .bl-toolkit
+        clean: false
     - name: Install blaxel
       shell: bash
       run: |
         mkdir -p $HOME/.local/bin
 
-        # Function to download with retry logic
-        download_with_retry() {
-          local url=$1
-          local max_attempts=5
-          local delay=2
-          local attempt=1
+        # Function to download with multiple fallback methods
+        download_with_fallbacks() {
+          local repo=$1
+          local path=$2
+          local output_file=$3
+          local max_attempts=3
 
-          while [ $attempt -le $max_attempts ]; do
-            if curl -fsSL --connect-timeout 30 --max-time 300 "$url" | BINDIR=$HOME/.local/bin sh; then
+          echo "Downloading installation script..."
+
+          # Method 1: Use locally checked out file (most reliable)
+          if [ -f ".bl-toolkit/$path" ]; then
+            echo "Using locally checked out installation script..."
+            cp ".bl-toolkit/$path" "$output_file"
+            echo "✓ Using local checkout"
+            return 0
+          fi
+
+          # Method 2: GitHub API (fallback)
+          echo "Trying GitHub API..."
+          if curl -fsSL \
+            --connect-timeout 30 \
+            --max-time 300 \
+            -H "Accept: application/vnd.github.v3.raw" \
+            -H "User-Agent: bl-action" \
+            "https://api.github.com/repos/$repo/contents/$path" \
+            -o "$output_file" 2>/dev/null; then
+            echo "✓ Downloaded via GitHub API"
+            return 0
+          fi
+
+          # Method 3: raw.githubusercontent.com with explicit TLS
+          echo "Trying raw.githubusercontent.com with TLS 1.2..."
+          if curl -fsSL \
+            --connect-timeout 30 \
+            --max-time 300 \
+            --tlsv1.2 \
+            -H "User-Agent: bl-action" \
+            "https://raw.githubusercontent.com/$repo/main/$path" \
+            -o "$output_file" 2>/dev/null; then
+            echo "✓ Downloaded via raw.githubusercontent.com"
+            return 0
+          fi
+
+          # Method 4: wget with different user agent
+          echo "Trying wget..."
+          if command -v wget >/dev/null 2>&1; then
+            if wget --secure-protocol=TLSv1_2 \
+              --timeout=30 \
+              --tries=1 \
+              --user-agent="bl-action" \
+              -O "$output_file" \
+              "https://raw.githubusercontent.com/$repo/main/$path" 2>/dev/null; then
+              echo "✓ Downloaded via wget"
               return 0
-            else
-              local exit_code=$?
-
-              if [ $attempt -eq $max_attempts ]; then
-                return $exit_code
-              fi
-
-              sleep $delay
-              delay=$((delay * 2))  # Exponential backoff
-              attempt=$((attempt + 1))
             fi
-          done
+          fi
+
+          # Method 5: GitHub tarball extraction (last resort)
+          echo "Trying GitHub tarball extraction..."
+          local temp_dir="/tmp/bl-install-$$"
+          mkdir -p "$temp_dir"
+
+          if curl -fsSL \
+            --connect-timeout 30 \
+            --max-time 300 \
+            -H "User-Agent: bl-action" \
+            "https://api.github.com/repos/$repo/tarball/main" | \
+            tar -xz -C "$temp_dir" --strip-components=1 2>/dev/null; then
+
+            if [ -f "$temp_dir/$path" ]; then
+              cp "$temp_dir/$path" "$output_file"
+              rm -rf "$temp_dir"
+              echo "✓ Downloaded via tarball extraction"
+              return 0
+            fi
+          fi
+
+          rm -rf "$temp_dir"
+          return 1
         }
 
-        # Download the installation script with retry logic
-        INSTALL_URL="https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh"
+        # Download the installation script with fallback methods
+        INSTALL_SCRIPT="/tmp/install.sh"
 
-        if [ "$BL_ENV" = "dev" ]; then
-          download_with_retry "$INSTALL_URL"
+        if download_with_fallbacks "blaxel-ai/toolkit" "install.sh" "$INSTALL_SCRIPT"; then
+          chmod +x "$INSTALL_SCRIPT"
+          BINDIR=$HOME/.local/bin sh "$INSTALL_SCRIPT"
         else
-          download_with_retry "$INSTALL_URL"
+          echo "Error: Failed to download installation script with all methods"
+          echo "Please check your network connection and GitHub access"
+          exit 1
         fi
 
         # Verify installation
@@ -65,6 +131,9 @@ runs:
         # Create symlink and add to PATH
         cp $HOME/.local/bin/blaxel $HOME/.local/bin/bl
         echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+        # Clean up checkout
+        rm -rf .bl-toolkit
     - name: Login to Blaxel
       shell: bash
       env:
