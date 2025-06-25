@@ -14,6 +14,7 @@ env:
 
 jobs:
   test-action:
+    environment: ${{ env.BL_ENV }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,8 +23,8 @@ jobs:
       - name: Test bl-action
         uses: ./  # This references the action in the current repo
         with:
-          workspace: ${{ secrets.BL_WORKSPACE || 'test-workspace' }}
-          apikey: ${{ secrets.BL_API_KEY || 'test-key' }}
+          workspace: ${{ vars.BL_WORKSPACE }}
+          apikey: ${{ secrets.BL_API_KEY }}
       - name: List agents
         run: bl get agents
       - name: List functions
@@ -34,6 +35,7 @@ jobs:
         run: bl get sandboxes
 
   test-installation-only:
+    environment: ${{ env.BL_ENV }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,12 +44,13 @@ jobs:
       - name: Test installation without deploy
         uses: ./
         with:
-          workspace: ${{ secrets.BL_WORKSPACE || 'test-workspace' }}
-          apikey: ${{ secrets.BL_API_KEY || 'test-key' }}
+          workspace: ${{ vars.BL_WORKSPACE }}
+          apikey: ${{ secrets.BL_API_KEY }}
           # No deploy parameter to test that path
 
   test-matrix:
     runs-on: ${{ matrix.os }}
+    environment: ${{ env.BL_ENV }}
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-20.04]
@@ -58,5 +61,5 @@ jobs:
       - name: Test on ${{ matrix.os }}
         uses: ./
         with:
-          workspace: ${{ secrets.BL_WORKSPACE || 'test-workspace' }}
-          apikey: ${{ secrets.BL_API_KEY || 'test-key' }}
+          workspace: ${{ vars.BL_WORKSPACE }}
+          apikey: ${{ secrets.BL_API_KEY }}
