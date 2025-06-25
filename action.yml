@@ -23,11 +23,46 @@ runs:
       run: |
         mkdir -p $HOME/.local/bin
 
+        # Function to download with retry logic
+        download_with_retry() {
+          local url=$1
+          local max_attempts=5
+          local delay=2
+          local attempt=1
+
+          while [ $attempt -le $max_attempts ]; do
+            if curl -fsSL --connect-timeout 30 --max-time 300 "$url" | BINDIR=$HOME/.local/bin sh; then
+              return 0
+            else
+              local exit_code=$?
+
+              if [ $attempt -eq $max_attempts ]; then
+                return $exit_code
+              fi
+
+              sleep $delay
+              delay=$((delay * 2))  # Exponential backoff
+              attempt=$((attempt + 1))
+            fi
+          done
+        }
+
+        # Download the installation script with retry logic
+        INSTALL_URL="https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh"
+
         if [ "$BL_ENV" = "dev" ]; then
-          curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+          download_with_retry "$INSTALL_URL"
         else
-          curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+          download_with_retry "$INSTALL_URL"
         fi
+
+        # Verify installation
+        if [ ! -f "$HOME/.local/bin/blaxel" ]; then
+          echo "Error: blaxel installation failed"
+          exit 1
+        fi
+
+        # Create symlink and add to PATH
         cp $HOME/.local/bin/blaxel $HOME/.local/bin/bl
         echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: Login to Blaxel

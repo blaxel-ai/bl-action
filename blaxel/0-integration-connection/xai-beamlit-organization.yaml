@@ -1,8 +1,0 @@
-apiVersion: blaxel.ai/v1alpha1
-kind: IntegrationConnection
-metadata:
-  name: xai-blaxel-organization
-spec:
-  integration: xai
-  secret:
-    apiKey: ${XAI_API_KEY}

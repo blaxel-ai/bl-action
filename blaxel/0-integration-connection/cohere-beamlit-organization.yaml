@@ -1,8 +1,0 @@
-apiVersion: blaxel.ai/v1alpha1
-kind: IntegrationConnection
-metadata:
-  name: cohere-blaxel-organization
-spec:
-  integration: cohere
-  secret:
-    apiKey: ${COHERE_API_KEY}

@@ -1,8 +1,0 @@
-apiVersion: blaxel.ai/v1alpha1
-kind: IntegrationConnection
-metadata:
-  name: openai-blaxel-organization
-spec:
-  integration: openai
-  secret:
-    apiKey: ${OPENAI_API_KEY}
