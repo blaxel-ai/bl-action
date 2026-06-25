@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+# NOTE: BL_API_KEY in both 'dev' and 'prod' GitHub environments must have
+# access to the workspace specified by vars.BL_WORKSPACE. If CI fails with
+# "permission denied for workspace", rotate the API key in the environment.
 env:
   BL_ENV: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
   BL_WORKSPACE: ${{ vars.BL_WORKSPACE }}
