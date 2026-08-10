@@ -19,7 +19,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout toolkit repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: blaxel-ai/toolkit
         path: .bl-toolkit
