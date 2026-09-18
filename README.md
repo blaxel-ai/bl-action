@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Blaxel Logo" src="https://blaxel.ai/logo_short.png" height="140" />
+  <img alt="Blaxel Logo" src=".github/assets/blaxel-logo.png" width="400" />
   <h3 align="center">Blaxel Action</h3>
   <p align="center"><a href="https://github.com/features/actions">GitHub Action</a> for Blaxel</p>
   <p align="center">
