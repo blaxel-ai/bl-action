@@ -15,6 +15,10 @@ inputs:
     description: "If you want to deploy to Blaxel, specify the path to the folder or the file you want to deploy"
     default: ""
     required: false
+  version:
+    description: "Blaxel CLI version to install (e.g. v0.1.122). Defaults to the latest published release."
+    default: ""
+    required: false
 runs:
   using: "composite"
   steps:
@@ -24,31 +28,24 @@ runs:
         repository: blaxel-ai/toolkit
         path: .bl-toolkit
         clean: false
-        fetch-depth: 0
-        fetch-tags: true
+        fetch-depth: 1
     - name: Install blaxel
       shell: bash
+      env:
+        BL_CLI_VERSION: ${{ inputs.version }}
       run: |
         mkdir -p $HOME/.local/bin
 
-        # LATEST_TAG is now available as environment variable
-        cd .bl-toolkit
-
-        # Try different approaches to get the latest release tag
-        LATEST_TAG=$(git tag --sort=-version:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 2>/dev/null)
+        # The newest git tag can exist before its release assets are published,
+        # so resolve the latest *published* release (web redirect, no API quota).
+        LATEST_TAG="$BL_CLI_VERSION"
         if [ -z "$LATEST_TAG" ]; then
-          # Fallback: try with less strict regex (allow more characters after version)
-          LATEST_TAG=$(git tag --sort=-version:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+' | grep -v -E '(rc|alpha|beta|dev|pre)' | head -n1 2>/dev/null)
+          LATEST_TAG=$(curl -fsSLI -o /dev/null -w '%{url_effective}' https://github.com/blaxel-ai/toolkit/releases/latest | sed -n 's#.*/releases/tag/##p')
         fi
         if [ -z "$LATEST_TAG" ]; then
-          # Fallback: just get the latest tag
-          LATEST_TAG=$(git tag --sort=-version:refname | head -n1 2>/dev/null)
+          echo "Error: could not resolve the latest published Blaxel CLI release"
+          exit 1
         fi
-        if [ -z "$LATEST_TAG" ]; then
-          LATEST_TAG="latest"
-        fi
-
-        cd ..
         echo "Using blaxel version: $LATEST_TAG"
 
         # Use the locally checked out installation script
