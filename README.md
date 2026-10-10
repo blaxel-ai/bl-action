@@ -38,6 +38,8 @@ jobs:
         with:
           workspace: "your-workspace"
           apikey: ${{ secrets.BL_API_KEY }}
+          # Optional: pin the Blaxel CLI version (defaults to the latest published release)
+          # version: "v0.1.122"
 ```
 
 ## Setup
